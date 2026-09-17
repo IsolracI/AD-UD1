@@ -13,10 +13,15 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class FlatFileAlumnoRepository implements AlumnoRepository {
+    private final Path ruta = Path.of("data/alumnos.txt");
+
+    public Path getRuta() {
+        return this.ruta;
+    }
+
     @Override
     public List<Alumno> findAll() throws IOException {
-        Path ruta = Path.of("data/alumnos.txt");
-        Stream<String> listaAlumnos = Files.lines(ruta);
+        Stream<String> listaAlumnos = Files.lines(getRuta());
         List<Alumno> alumnos = new ArrayList<>();
 
         listaAlumnos.forEach(alumno -> alumnos.add(new Alumno(alumno.split(" ")[0], alumno.split(" ")[1])));
@@ -25,11 +30,19 @@ public class FlatFileAlumnoRepository implements AlumnoRepository {
 
     @Override
     public void save(Alumno alumno) throws IOException {
-        Path ruta = Path.of("data/alumnos.txt");
         String nombre = alumno.getNombre();
         String dni = alumno.getDni();
         String csq = "\n" + nombre + " " + dni;
 
-        Files.writeString(ruta, csq, StandardOpenOption.APPEND);
+        Files.writeString(getRuta(), csq, StandardOpenOption.APPEND);
+    }
+
+    @Override
+    public Alumno findByDni(String dni) throws IOException {
+        Stream<String> listaAlumnos = Files.lines(getRuta());
+
+        String alumnoBuscado = listaAlumnos.filter(alumno -> alumno.split(" ")[1] == dni).toString();
+
+        return new Alumno(alumnoBuscado.split(" ")[0], alumnoBuscado.split(" ")[1]);
     }
 }

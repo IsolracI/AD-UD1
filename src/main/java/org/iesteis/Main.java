@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class Main {
-    static void main() {
+    static void main() throws IOException {
 //        Path ruta = Path.of("data/alumnos.txt");
 //
 //        try {
@@ -51,6 +51,12 @@ public class Main {
         FlatFileAlumnoRepository repository = new FlatFileAlumnoRepository();
         try {
             repository.findAll().forEach(System.out::println);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
             Alumno juan = new Alumno("Juan", "12345678A");
             repository.save(juan);
             System.out.println("alumno nuevo");
@@ -60,6 +66,11 @@ public class Main {
             e.printStackTrace();
         }
 
-
+        try {
+            System.out.println("Alumno buscado:\n");
+            System.out.println(repository.findByDni("67676767A"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

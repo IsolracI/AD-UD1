@@ -8,5 +8,5 @@ import java.util.List;
 public interface AlumnoRepository {
     List<Alumno> findAll() throws IOException;
     void save(Alumno alumno) throws IOException;
-//    Alumno findByDni(String dni);
+    Alumno findByDni(String dni) throws IOException;
 }
