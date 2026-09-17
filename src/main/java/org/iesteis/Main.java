@@ -52,7 +52,9 @@ public class Main {
         try {
             repository.findAll().forEach(System.out::println);
             Alumno juan = new Alumno("Juan", "12345678A");
+            repository.save(juan);
             System.out.println("alumno nuevo");
+            repository.findAll();
         }
         catch (IOException e) {
             e.printStackTrace();

@@ -19,7 +19,6 @@ public class FlatFileAlumnoRepository implements AlumnoRepository {
         Stream<String> listaAlumnos = Files.lines(ruta);
         List<Alumno> alumnos = new ArrayList<>();
 
-
         listaAlumnos.forEach(alumno -> alumnos.add(new Alumno(alumno.split(" ")[0], alumno.split(" ")[1])));
         return alumnos;
     }
@@ -29,7 +28,8 @@ public class FlatFileAlumnoRepository implements AlumnoRepository {
         Path ruta = Path.of("data/alumnos.txt");
         String nombre = alumno.getNombre();
         String dni = alumno.getDni();
+        String csq = "\n" + nombre + " " + dni;
 
-        Files.writeString(ruta, nombre + " " + dni, StandardOpenOption.APPEND);
+        Files.writeString(ruta, csq, StandardOpenOption.APPEND);
     }
 }
