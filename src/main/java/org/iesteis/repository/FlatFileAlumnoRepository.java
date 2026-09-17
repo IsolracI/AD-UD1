@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -26,12 +27,9 @@ public class FlatFileAlumnoRepository implements AlumnoRepository {
     @Override
     public void save(Alumno alumno) throws IOException {
         Path ruta = Path.of("data/alumnos.txt");
+        String nombre = alumno.getNombre();
+        String dni = alumno.getDni();
 
-        System.out.println("Escriba un nombre:\n");
-        BufferedReader nombre = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Escribe un DNI:\n");
-        BufferedReader dni = new BufferedReader(new InputStreamReader(System.in));
-        String = nombre.readLine().strip();
-        Files.writeString(ruta, )
+        Files.writeString(ruta, nombre + " " + dni, StandardOpenOption.APPEND);
     }
 }

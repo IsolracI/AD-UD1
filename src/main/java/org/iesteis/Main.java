@@ -47,13 +47,17 @@ public class Main {
 //        catch (IOException e) {
 //            e.printStackTrace();
 //        }
+
         FlatFileAlumnoRepository repository = new FlatFileAlumnoRepository();
         try {
             repository.findAll().forEach(System.out::println);
-
+            Alumno juan = new Alumno("Juan", "12345678A");
+            System.out.println("alumno nuevo");
         }
         catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 }
